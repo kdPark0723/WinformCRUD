@@ -32,9 +32,37 @@ namespace WinFormCRUD
 
         public DataSet GetData()
         {
+            string query = "SELECT * FROM " + connectionInfo.GetTable();
+
+            return ExcuteSelectQuery(query);
+        }
+
+        public void InsertData(string colNames, string colData)
+        {
+            string query = "INSERT INTO " + connectionInfo.GetTable() + "(" + colNames + ") VALUES (" + colData + ")";
+
+            ExcuteNonQuery(query);
+        }
+
+        public void UpdateData(string cols, string keys)
+        {
+            string query = "UPDATE " + connectionInfo.GetTable() + " SET " + cols + " WHERE " + keys;
+
+            ExcuteNonQuery(query);
+        }
+
+        public void DeleteData(string keys)
+        {
+            string query = "DELETE FROM " + connectionInfo.GetTable() + " WHERE " + keys;
+
+            ExcuteNonQuery(query);
+        }
+
+        private DataSet ExcuteSelectQuery(string query)
+        {
             connection.Open();
 
-            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM " + connectionInfo.GetTable(), connection);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
             DataSet ds = new DataSet();
             adapter.Fill(ds);
 
@@ -43,34 +71,8 @@ namespace WinFormCRUD
             return ds;
         }
 
-        public void InsertData(string colNames, string colData)
+        private void ExcuteNonQuery(string query)
         {
-            string query = "INSERT INTO " + connectionInfo.GetTable() + "(" + colNames + ") VALUES (" + colData + ")";
-
-            connection.Open();
-
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.ExecuteNonQuery();
-
-            connection.Close();
-        }
-
-        public void UpdateData(string cols, string keys)
-        {
-            string query = "UPDATE " + connectionInfo.GetTable() + " SET " + cols + " WHERE " + keys;
-
-            connection.Open();
-
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.ExecuteNonQuery();
-
-            connection.Close();
-        }
-
-        public void DeleteData(string keys)
-        {
-            string query = "DELETE FROM " + connectionInfo.GetTable() + " WHERE " + keys;
-
             connection.Open();
 
             MySqlCommand cmd = new MySqlCommand(query, connection);
