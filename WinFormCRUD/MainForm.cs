@@ -89,16 +89,14 @@ namespace WinFormCRUD
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-            bool isFirst = true;
             for (int i = 0; i < size; ++i)
             {
-                if (!isFirst)
+                if (i != 0)
                     sb.Append(", ");
 
                 string value = ParseValue(dataGridView1.Rows[dataGridView1.CurrentCellAddress.Y].Cells[i].Value.ToString());
 
                 sb.Append(value);
-                isFirst = false;
             }
 
             return sb.ToString();
@@ -117,7 +115,7 @@ namespace WinFormCRUD
                 string name = dataGridView1.Columns[i].Name;
                 string value = ParseValue(dataGridView1.Rows[dataGridView1.CurrentCellAddress.Y].Cells[i].Value.ToString());
 
-                if (name.Equals("id"))
+                if (IsPrimaryKey(name))
                     continue;
 
                 if (!isFirst)
@@ -138,22 +136,30 @@ namespace WinFormCRUD
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
+            bool isFirst = true;
             for (int i = 0; i < size; ++i)
             {
                 string name = dataGridView1.Columns[i].Name;
                 string value = ParseValue(dataGridView1.Rows[dataGridView1.CurrentCellAddress.Y].Cells[i].Value.ToString());
 
-                if (!name.Equals("id"))
+                if (!IsPrimaryKey(name))
                     continue;
 
-                if (i != 0)
+                if (!isFirst)
                     sb.Append(", ");
 
 
                 sb.Append(name + "=" + value);
+
+                isFirst = false;
             }
 
             return sb.ToString();
+        }
+
+        private bool IsPrimaryKey(string value)
+        {
+            return value.Equals("id");
         }
 
         private string ParseValue(string value)
