@@ -23,14 +23,14 @@ namespace WinFormCRUD
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-
             this.connection.SetServer(this.urlInputTextBox.Text);
             this.connection.SetPort(this.portIndexTextBox.Text);
             this.connection.SetDatabase(this.databaseInputTextBox.Text);
             this.connection.SetTable(this.tableInputTextBox.Text);
             this.connection.SetUser(this.userInputTextBox.Text);
             this.connection.SetPassword(this.passwordInputTextBox.Text);
+
+            this.Close();
         }
     }
 }

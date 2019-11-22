@@ -2,7 +2,7 @@
 {
     public class DatabaseConnectionInfo
     {
-        private string server;
+        public string server;
         private string port;
         private string database;
         private string user;
