@@ -9,7 +9,6 @@ namespace WinFormCRUD
         DatabaseConnectionInfo connectionInfo;
         MySqlConnection connection;
 
-
         public DataAccessor(DatabaseConnectionInfo connectionInfo)
         {
             this.connectionInfo = connectionInfo;
