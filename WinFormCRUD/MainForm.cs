@@ -50,12 +50,14 @@ namespace WinFormCRUD
         private void UpdateButton_Click(object sender, EventArgs e)
         {
             dataAccessor.UpdateData(GetSelectColNamesAndData(), GetSelectPrimaryKeyColNamesAndData());
+
             SyncData();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             dataAccessor.DeleteData(GetSelectPrimaryKeyColNamesAndData());
+
             SyncData();
         }
 
