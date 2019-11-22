@@ -58,7 +58,7 @@
 
         public string GetConnectionInfo()
         {
-            return string.Format(@"Server=" + this.server + "; Port=" + this.port + "; Database=" + this.database + "; Uid=" + this.user + "; Pwd=" + this.password + "; CharSet=utf8;");
+            return "Server=" + this.server + "; Port=" + this.port + "; Database=" + this.database + "; Uid=" + this.user + "; Pwd=" + this.password + "; CharSet=utf8;";
         }
     }
 }
